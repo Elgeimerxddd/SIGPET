@@ -1,12 +1,22 @@
+/* RESET GENERAL */
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+}
+
+/* BODY */
+
 body{
 font-family: Arial, sans-serif;
-margin:0;
 background:#f4f4f4;
-
 min-height:100vh;
 
 display:flex;
 flex-direction:column;
+
+/* 🔥 evita que se vea pegado en móvil */
+padding-bottom:10px;
 }
 
 /* HEADER */
@@ -28,13 +38,15 @@ gap:12px;
 
 nav a{
 color:white;
-margin:0 12px;
 text-decoration:none;
 font-weight:bold;
+padding:6px 10px;
+border-radius:6px;
+transition:0.2s;
 }
 
 nav a:hover{
-text-decoration:underline;
+background:rgba(255,255,255,0.2);
 }
 
 /* CONTENIDO */
@@ -47,6 +59,7 @@ padding:20px;
 display:flex;
 flex-direction:column;
 align-items:center;
+justify-content:center; /* 🔥 centrado vertical */
 }
 
 /* TARJETA */
@@ -54,10 +67,10 @@ align-items:center;
 .card{
 background:white;
 padding:30px;
-border-radius:12px;
-box-shadow:0px 6px 15px rgba(0,0,0,0.15);
+border-radius:20px;
+box-shadow:0px 6px 25px rgba(0,0,0,0.1);
 width:100%;
-max-width:600px;
+max-width:500px;
 text-align:center;
 }
 
@@ -65,11 +78,17 @@ text-align:center;
 
 input, select{
 width:100%;
-padding:12px;
+padding:14px;
 border:1px solid #ccc;
-border-radius:6px;
+border-radius:8px;
 font-size:16px;
 margin-top:6px;
+outline:none;
+transition:0.2s;
+}
+
+input:focus, select:focus{
+border-color:#0d3b78;
 }
 
 /* BOTON */
@@ -78,16 +97,18 @@ button{
 background:#f48c46;
 color:white;
 border:none;
-padding:12px 25px;
-border-radius:6px;
+padding:16px;
+border-radius:10px;
 font-size:16px;
 cursor:pointer;
 width:100%;
-max-width:250px;
+max-width:none; /* 🔥 ocupa todo */
+transition:0.2s;
 }
 
 button:hover{
 background:#e37730;
+transform:scale(1.02);
 }
 
 /* BOTON PRINCIPAL */
@@ -97,12 +118,12 @@ margin-top:25px;
 background:#f48c46;
 color:white;
 border:none;
-padding:14px 26px;
+padding:16px;
 font-size:17px;
-border-radius:6px;
+border-radius:10px;
 cursor:pointer;
 width:100%;
-max-width:300px;
+max-width:none;
 }
 
 /* FOOTER */
@@ -112,11 +133,10 @@ background:#2aa6a4;
 color:white;
 text-align:center;
 padding:12px;
-
 width:100%;
 }
 
-/* TITULO COCINA */
+/* TITULO */
 
 .titulo-cocina{
 text-align:center;
@@ -134,15 +154,15 @@ gap:20px;
 padding:20px;
 }
 
-/* TARJETAS DE PEDIDOS */
+/* TARJETAS */
 
 .pedido-card{
 background:white;
 padding:20px;
 width:100%;
 max-width:300px;
-border-radius:10px;
-box-shadow:0 0 10px rgba(0,0,0,0.2);
+border-radius:12px;
+box-shadow:0 0 12px rgba(0,0,0,0.15);
 text-align:left;
 }
 
@@ -174,13 +194,9 @@ background:#f48c46;
 color:white;
 border:none;
 padding:10px;
-border-radius:5px;
+border-radius:6px;
 cursor:pointer;
 width:100%;
-}
-
-.botones-cocina button:hover{
-background:#e37730;
 }
 
 /* MENU */
@@ -198,22 +214,63 @@ margin-bottom:25px;
 font-size:28px;
 }
 
-/* RESPONSIVE */
+/* ========================= */
+/* 🔥 RESPONSIVE MEJORADO 🔥 */
+/* ========================= */
 
-@media (max-width:600px){
+@media (max-width:768px){
 
 main{
 padding:15px;
 }
 
-.card{
-padding:20px;
+/* Header más compacto */
+header{
+padding:10px;
 }
 
+header h2{
+font-size:20px;
+}
+
+/* Tarjetas más tipo app */
+.card{
+padding:20px;
+border-radius:15px;
+}
+
+/* Inputs tipo app */
+input, select{
+font-size:18px;
+padding:16px;
+}
+
+/* Botones grandes */
+button, .btn-principal{
+font-size:18px;
+padding:16px;
+}
+
+/* Navegación vertical */
+nav{
+flex-direction:column;
+gap:8px;
+}
+
+nav a{
+display:block;
+width:100%;
+text-align:center;
+background:rgba(255,255,255,0.1);
+padding:10px;
+}
+
+/* Pedidos a ancho completo */
 .pedido-card{
 max-width:100%;
 }
 
+/* Menu vertical */
 .menu-item{
 font-size:16px;
 flex-direction:column;
@@ -221,17 +278,24 @@ align-items:flex-start;
 gap:5px;
 }
 
-button{
-width:100%;
-}
-
-nav{
-flex-direction:column;
-gap:6px;
-}
-
+/* Títulos más compactos */
 .titulo-cocina{
 font-size:24px;
+}
+
+}
+
+/* EXTRA: pantallas muy pequeñas */
+
+@media (max-width:400px){
+
+.card{
+padding:15px;
+}
+
+input, select, button{
+font-size:16px;
+padding:14px;
 }
 
 }
