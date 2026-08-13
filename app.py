@@ -1,6 +1,7 @@
 from flask import Flask, render_template
 
 from config import SECRET_KEY
+from database import inicializar_bd
 
 from routes.auth import auth
 from routes.pedidos import pedidos
@@ -13,6 +14,9 @@ from routes.api import api
 app = Flask(__name__)
 
 app.secret_key = SECRET_KEY
+
+# Inicializar base de datos
+inicializar_bd()
 
 
 
