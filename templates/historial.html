@@ -1,0 +1,263 @@
+{% extends "base.html" %}
+
+{% block title %}
+Historial | SIGPET
+{% endblock %}
+
+{% block content %}
+
+<section class="hero-card">
+
+    <i class="fa-solid fa-clock-rotate-left fa-4x"
+       style="color:var(--color-primario);margin-bottom:20px;">
+    </i>
+
+    <h1>Historial de Pedidos</h1>
+
+    <p>
+        Consulta todos los pedidos registrados en SIGPET.
+    </p>
+
+</section>
+
+{% if pedidos %}
+
+<!-- ========================================= -->
+<!-- BUSCADOR -->
+<!-- ========================================= -->
+
+<section class="card hero-card" style="margin-top:30px;">
+
+    <div class="historial-filtros">
+
+        <input
+            type="text"
+            id="buscarPedido"
+            placeholder="🔍 Buscar cliente, platillo o pedido">
+
+        <select id="filtroEstado">
+
+            <option value="">Todos los estados</option>
+
+            <option>Pendiente</option>
+
+            <option>Preparando</option>
+
+            <option>Listo</option>
+
+            <option>Entregado</option>
+
+            <option>Cancelado</option>
+
+        </select>
+
+    </div>
+
+</section>
+
+<!-- ========================================= -->
+<!-- TABLA -->
+<!-- ========================================= -->
+
+<section class="card hero-card" style="margin-top:25px;overflow:auto;">
+
+<table class="tabla-historial">
+
+<thead>
+
+<tr>
+
+<th>#</th>
+
+<th>Cliente</th>
+
+<th>Platillo</th>
+
+<th>Estado</th>
+
+<th>Total</th>
+
+<th>Fecha</th>
+
+<th>Acción</th>
+
+</tr>
+
+</thead>
+
+<tbody>
+
+{% for pedido in pedidos %}
+
+<tr
+class="filaPedido"
+
+data-id="{{ pedido['id'] }}"
+data-cliente="{{ pedido['cliente'] }}"
+data-productos="{{ pedido['productos'] }}"
+data-estado="{{ pedido['estado'] }}"
+data-fecha="{{ pedido['fecha'] }}"
+data-hora="{{ pedido['hora'] }}"
+data-total="{{ pedido['total'] }}"
+>
+
+<td>
+<strong>
+#{{ pedido["id"] }}
+</strong>
+</td>
+
+<td>
+
+{{ pedido["cliente"] }}
+
+</td>
+
+<td style="white-space:pre-line;">
+
+{{ pedido["productos"] }}
+
+</td>
+
+<td>
+
+{% if pedido["estado"] == "Pendiente" %}
+
+<span class="estado pendiente">
+🟠 {{ pedido["estado"] }}
+</span>
+
+{% elif pedido["estado"] == "Preparando" %}
+
+<span class="estado preparando">
+
+🟡 {{ pedido["estado"] }}
+
+</span>
+
+{% elif pedido["estado"] == "Listo" %}
+
+<span class="estado listo">
+
+🟢 {{ pedido["estado"] }}
+
+</span>
+
+{% elif pedido["estado"] == "Entregado" %}
+
+<span class="estado entregado">
+
+🔵 {{ pedido["estado"] }}
+
+</span>
+
+{% else %}
+
+<span class="estado cancelado">
+
+🔴 {{ pedido["estado"] }}
+
+</span>
+
+{% endif %}
+
+</td>
+
+<td>
+
+${{ pedido["total"] }}
+
+</td>
+
+<td>
+
+{{ pedido["fecha"] }}
+
+</td>
+
+<td>
+
+<button
+class="btn btn-secundario btnVer">
+
+<i class="fa-solid fa-eye"></i>
+
+Ver
+
+</button>
+
+</td>
+
+</tr>
+
+{% endfor %}
+
+</tbody>
+
+</table>
+
+</section>
+
+<!-- ========================================= -->
+<!-- MODAL DETALLE -->
+<!-- ========================================= -->
+
+<div id="modalHistorial" class="modal">
+
+    <div class="modal-contenido">
+
+        <h2>
+
+            <i class="fa-solid fa-receipt"></i>
+
+            Detalle del Pedido
+
+        </h2>
+
+        <hr style="margin:20px 0;">
+
+        <div id="detallePedido">
+
+        </div>
+
+        <br>
+
+        <div style="text-align:center;">
+
+            <button
+                class="btn btn-secundario"
+                onclick="cerrarHistorial()">
+
+                <i class="fa-solid fa-xmark"></i>
+
+                Cerrar
+
+            </button>
+
+        </div>
+
+    </div>
+
+</div>
+
+{% else %}
+
+<section class="card hero-card">
+
+    <i class="fa-solid fa-box-open fa-4x"
+       style="color:var(--color-exito);margin-bottom:20px;">
+    </i>
+
+    <h2>No hay pedidos registrados</h2>
+
+</section>
+
+{% endif %}
+
+<!-- ========================================= -->
+<!-- JAVASCRIPT -->
+<!-- ========================================= -->
+
+<script src="{{ url_for('static', filename='js/historial.js') }}"></script>
+
+{% endblock %}

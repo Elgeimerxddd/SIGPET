@@ -1,77 +1,543 @@
-<!DOCTYPE html>
-<html>
+{% extends "base.html" %}
 
-<head>
+{% block title %}
+Nuevo Pedido
+{% endblock %}
 
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+{% block content %}
 
-<meta charset="UTF-8">
+<!-- ==========================================
+     PEDIDO
+=========================================== -->
 
-<link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+<section class="pedido-container">
 
-<title>Realizar pedido | SIGPET</title>
+    <!-- ==========================================
+         MENÚ
+    =========================================== -->
 
-</head>
+    <div class="menu">
 
-<body>
+        <div class="pedido-encabezado">
 
-<header>
+            <div>
 
-<h1>SIGPET</h1>
+                <span class="pedido-etiqueta">
+                    <i class="fa-solid fa-utensils"></i>
+                    REALIZA TU PEDIDO
+                </span>
 
-<nav>
-<a href="/">Inicio</a>
-<a href="/menu">Menú</a>
-<a href="/consultar">Consultar pedido</a>
-</nav>
+                <h2>
+                    <i class="fa-solid fa-utensils"></i>
+                    Nuestro Menú
+                </h2>
 
-</header>
+                <p>
+                    Selecciona tus productos y agrégalos a tu pedido.
+                </p>
 
-<main>
+            </div>
 
-<div class="card">
+            <div class="pedido-icono">
+                <i class="fa-solid fa-burger"></i>
+            </div>
 
-<h2>Realizar pedido</h2>
+        </div>
 
-<form action="/confirmacion" method="post">
 
-<label>Nombre:</label>
-<input type="text" name="nombre" required>
+        <!-- ==========================================
+             PRODUCTOS
+        =========================================== -->
 
-<br><br>
+        <div class="productos-grid">
 
-<label>Platillo:</label>
+<!-- ==========================================
+     HAMBURGUESA
+=========================================== -->
 
-<select name="platillo">
+<div class="producto">
 
-<option>Tacos</option>
-<option>Hamburguesa</option>
-<option>Hotdog</option>
-<option>Refresco</option>
+    <div class="producto-info">
 
-</select>
+        <div class="producto-icono">
+            🍔
+        </div>
 
-<br><br>
+        <div class="producto-texto">
 
-<label>Cantidad:</label>
-<input type="number" name="cantidad" min="1" required>
+            <h3>Hamburguesa</h3>
 
-<br><br>
+            <p class="producto-descripcion">
+                Deliciosa hamburguesa preparada al momento.
+            </p>
 
-<button type="submit" class="btn-principal">Enviar pedido</button>
+        </div>
 
-</form>
+    </div>
+
+
+    <div class="producto-footer">
+
+        <p class="precio">
+            $95
+        </p>
+
+
+        <div class="cantidad">
+
+            <button
+                type="button"
+                class="menos">
+
+                <i class="fa-solid fa-minus"></i>
+
+            </button>
+
+
+            <input
+                type="number"
+                class="cantidad-input"
+                value="1"
+                min="1"
+                readonly>
+
+
+            <button
+                type="button"
+                class="mas">
+
+                <i class="fa-solid fa-plus"></i>
+
+            </button>
+
+        </div>
+
+
+        <button
+            type="button"
+            class="agregar"
+            data-nombre="Hamburguesa"
+            data-precio="95"
+            data-icono="🍔">
+
+            <i class="fa-solid fa-cart-plus"></i>
+
+            Agregar
+
+        </button>
+
+    </div>
 
 </div>
 
-</main>
+<!-- ==========================================
+     TACOS
+=========================================== -->
 
-<footer>
+<div class="producto">
 
-<p>SIGPET — Sistema de gestión de pedidos</p>
+    <div class="producto-info">
 
-</footer>
+        <div class="producto-icono">
+            🌮
+        </div>
 
-</body>
+        <div class="producto-texto">
 
-</html>
+            <h3>Tacos</h3>
+
+            <p class="producto-descripcion">
+                Tacos preparados con ingredientes frescos.
+            </p>
+
+        </div>
+
+    </div>
+
+
+    <div class="producto-footer">
+
+        <p class="precio">
+            $70
+        </p>
+
+
+        <div class="cantidad">
+
+            <button
+                type="button"
+                class="menos">
+
+                <i class="fa-solid fa-minus"></i>
+
+            </button>
+
+
+            <input
+                type="number"
+                class="cantidad-input"
+                value="1"
+                min="1"
+                readonly>
+
+
+            <button
+                type="button"
+                class="mas">
+
+                <i class="fa-solid fa-plus"></i>
+
+            </button>
+
+        </div>
+
+
+        <button
+            type="button"
+            class="agregar"
+            data-nombre="Tacos"
+            data-precio="70"
+            data-icono="🌮">
+
+            <i class="fa-solid fa-cart-plus"></i>
+
+            Agregar
+
+        </button>
+
+    </div>
+
+</div>
+
+<!-- ==========================================
+     HOT DOG
+=========================================== -->
+
+<div class="producto">
+
+    <div class="producto-info">
+
+        <div class="producto-icono">
+            🌭
+        </div>
+
+        <div class="producto-texto">
+
+            <h3>Hot Dog</h3>
+
+            <p class="producto-descripcion">
+                Delicioso hot dog preparado al momento.
+            </p>
+
+        </div>
+
+    </div>
+
+
+    <div class="producto-footer">
+
+        <p class="precio">
+            $45
+        </p>
+
+
+        <div class="cantidad">
+
+            <button
+                type="button"
+                class="menos">
+
+                <i class="fa-solid fa-minus"></i>
+
+            </button>
+
+
+            <input
+                type="number"
+                class="cantidad-input"
+                value="1"
+                min="1"
+                readonly>
+
+
+            <button
+                type="button"
+                class="mas">
+
+                <i class="fa-solid fa-plus"></i>
+
+            </button>
+
+        </div>
+
+
+        <button
+            type="button"
+            class="agregar"
+            data-nombre="Hot Dog"
+            data-precio="45"
+            data-icono="🌭">
+
+            <i class="fa-solid fa-cart-plus"></i>
+
+            Agregar
+
+        </button>
+
+    </div>
+
+</div>
+
+<!-- ==========================================
+     REFRESCO
+=========================================== -->
+
+<div class="producto">
+
+    <div class="producto-info">
+
+        <div class="producto-icono">
+            🥤
+        </div>
+
+        <div class="producto-texto">
+
+            <h3>Refresco</h3>
+
+            <p class="producto-descripcion">
+                Refresco frío para acompañar tu comida.
+            </p>
+
+        </div>
+
+    </div>
+
+
+    <div class="producto-footer">
+
+        <p class="precio">
+            $25
+        </p>
+
+
+        <div class="cantidad">
+
+            <button
+                type="button"
+                class="menos">
+
+                <i class="fa-solid fa-minus"></i>
+
+            </button>
+
+
+            <input
+                type="number"
+                class="cantidad-input"
+                value="1"
+                min="1"
+                readonly>
+
+
+            <button
+                type="button"
+                class="mas">
+
+                <i class="fa-solid fa-plus"></i>
+
+            </button>
+
+        </div>
+
+
+        <button
+            type="button"
+            class="agregar"
+            data-nombre="Refresco"
+            data-precio="25"
+            data-icono="🥤">
+
+            <i class="fa-solid fa-cart-plus"></i>
+
+            Agregar
+
+        </button>
+
+    </div>
+
+</div>
+
+        </div>
+
+    </div>
+
+    <!-- ==========================================
+     CARRITO DEL PEDIDO
+========================================== -->
+
+<div class="carrito-pedido">
+
+    <div class="carrito-titulo">
+
+        <div>
+
+            <span class="pedido-etiqueta">
+                <i class="fa-solid fa-cart-shopping"></i>
+                TU PEDIDO
+            </span>
+
+            <h2>
+                <i class="fa-solid fa-bag-shopping"></i>
+                Resumen del pedido
+            </h2>
+
+            <p>
+                Revisa los productos antes de confirmar.
+            </p>
+
+        </div>
+
+        <div class="carrito-contador">
+            <i class="fa-solid fa-cart-shopping"></i>
+
+            <span id="contador-carrito">
+                0
+            </span>
+        </div>
+
+    </div>
+
+
+    <!-- PRODUCTOS -->
+
+    <div id="lista-carrito">
+
+        <p class="carrito-vacio">
+
+            <i class="fa-solid fa-cart-shopping"></i>
+
+            Aún no has agregado productos.
+
+        </p>
+
+    </div>
+
+
+    <!-- TOTAL -->
+
+    <div class="carrito-total">
+
+        <span>
+            <i class="fa-solid fa-dollar-sign"></i>
+            Total del pedido
+        </span>
+
+        <strong id="total">
+            $0
+        </strong>
+
+    </div>
+
+</div>
+
+<!-- ==========================================
+     CONFIRMAR PEDIDO
+=========================================== -->
+
+<div class="confirmar-pedido">
+
+    <div class="confirmar-encabezado">
+
+        <span class="pedido-etiqueta">
+            <i class="fa-solid fa-receipt"></i>
+            CASI TERMINAMOS
+        </span>
+
+        <h2>
+            <i class="fa-solid fa-user"></i>
+            Datos del pedido
+        </h2>
+
+        <p>
+            Escribe tu nombre y confirma cuando tu pedido esté listo.
+        </p>
+
+    </div>
+
+
+    <form
+        id="formPedido"
+        action="{{ url_for('pedidos.confirmacion') }}"
+        method="POST">
+
+
+        <!-- NOMBRE DEL CLIENTE -->
+
+        <div class="campo-cliente">
+
+            <label for="cliente">
+
+                <i class="fa-solid fa-user"></i>
+
+                ¿A nombre de quién va el pedido?
+
+            </label>
+
+
+            <input
+                type="text"
+                id="cliente"
+                placeholder="Escribe tu nombre"
+                autocomplete="name">
+
+        </div>
+
+
+        <!-- DATOS OCULTOS PARA FLASK -->
+
+        <input
+            type="hidden"
+            name="cliente"
+            id="clienteHidden">
+
+        <input
+            type="hidden"
+            name="productos"
+            id="productosHidden">
+
+
+        <!-- BOTÓN -->
+
+        <button
+            type="button"
+            id="realizar-pedido"
+            class="btn-realizar-pedido">
+
+            <i class="fa-solid fa-receipt"></i>
+
+
+            <span>
+
+                <strong>
+                    Realizar Pedido
+                </strong>
+
+                <small>
+                    Confirma tu pedido
+                </small>
+
+            </span>
+
+
+            <i class="fa-solid fa-arrow-right"></i>
+
+        </button>
+
+    </form>
+
+</div>
+
+
+</section>
+
+{% endblock %}

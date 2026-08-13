@@ -1,0 +1,333 @@
+{% extends "base.html" %}
+
+{% block title %}
+Dashboard Administrativo | SIGPET
+{% endblock %}
+
+{% block content %}
+
+<!-- ====================================== -->
+<!-- HERO -->
+<!-- ====================================== -->
+
+<section class="hero-card">
+
+    <i class="fa-solid fa-chart-line fa-4x"
+       style="color:var(--color-primario);margin-bottom:20px;">
+    </i>
+
+    <h1>Dashboard Administrativo</h1>
+
+    <p>
+        Estadísticas generales del sistema SIGPET
+    </p>
+
+    <div class="dashboard-actions">
+
+    <a href="/dashboard/pdf" class="btn">
+
+        <i class="fa-solid fa-file-pdf"></i>
+
+        Exportar PDF
+
+    </a>
+
+    <a href="/dashboard/excel" class="btn btn-secundario">
+
+        <i class="fa-solid fa-file-excel"></i>
+
+        Exportar Excel
+
+    </a>
+
+</div>
+
+</section>
+
+<!-- ====================================== -->
+<!-- TARJETAS -->
+<!-- ====================================== -->
+
+<div class="panel-cocina">
+
+<div class="card pedido-card">
+
+<i class="fa-solid fa-list-check fa-2x"
+style="color:#ff6b35;"></i>
+
+<h2>Total de Pedidos</h2>
+
+<h1
+id="totalPedidos"
+style="color:#ff6b35;">
+
+{{ total }}
+
+</h1>
+
+</div>
+
+<div class="card pedido-card">
+
+<i class="fa-solid fa-circle-check fa-2x"
+style="color:#2ecc71;"></i>
+
+<h2>Entregados</h2>
+
+<h1
+id="entregados"
+style="color:#2ecc71;">
+
+{{ entregados }}
+
+</h1>
+
+</div>
+
+<div class="card pedido-card">
+
+<i class="fa-solid fa-circle-xmark fa-2x"
+style="color:#e74c3c;"></i>
+
+<h2>Cancelados</h2>
+
+<h1
+id="cancelados"
+style="color:#e74c3c;">
+
+{{ cancelados }}
+
+</h1>
+
+</div>
+
+<div class="card pedido-card">
+
+<i class="fa-solid fa-hourglass-half fa-2x"
+style="color:#f39c12;"></i>
+
+<h2>Pendientes</h2>
+
+<h1
+id="pendientes"
+style="color:#f39c12;">
+
+{{ pendientes }}
+
+</h1>
+
+</div>
+
+<div class="card pedido-card">
+
+<i class="fa-solid fa-fire-burner fa-2x"
+style="color:#3498db;"></i>
+
+<h2>Preparando</h2>
+
+<h1
+id="preparando"
+style="color:#3498db;">
+
+{{ preparando }}
+
+</h1>
+
+</div>
+
+<div class="card pedido-card">
+
+<i class="fa-solid fa-bell-concierge fa-2x"
+style="color:#27ae60;"></i>
+
+<h2>Listos</h2>
+
+<h1
+id="listos"
+style="color:#27ae60;">
+
+{{ listos }}
+
+</h1>
+
+</div>
+
+<div class="card pedido-card">
+
+<i class="fa-solid fa-chart-simple fa-2x"
+style="color:#8e44ad;"></i>
+
+<h2>Promedio</h2>
+
+<h1
+id="promedio"
+style="color:#8e44ad;">
+
+${{ "%.2f"|format(promedio) }}
+
+</h1>
+
+</div>
+
+<div class="card pedido-card">
+
+<i class="fa-solid fa-dollar-sign fa-2x"
+style="color:#3498db;"></i>
+
+<h2>Ventas Totales</h2>
+
+<h1
+id="ventas"
+style="color:#3498db;">
+
+${{ "%.2f"|format(ventas) }}
+
+</h1>
+
+</div>
+
+</div>
+
+<!-- ====================================== -->
+<!-- ESTADOS -->
+<!-- ====================================== -->
+
+<section class="hero-card" style="margin-top:40px;">
+
+    <h2>
+
+        <i class="fa-solid fa-chart-pie"></i>
+
+        Estados de los Pedidos
+
+    </h2>
+
+    <br>
+
+    <div style="max-width:450px;margin:auto;">
+
+        <canvas id="graficaEstados"></canvas>
+
+    </div>
+
+</section>
+
+<!-- ====================================== -->
+<!-- PLATILLO FAVORITO -->
+<!-- ====================================== -->
+
+<section class="hero-card" style="margin-top:40px;">
+
+    <i class="fa-solid fa-burger fa-3x"
+       style="color:#ff6b35;margin-bottom:20px;">
+    </i>
+
+    <h2>
+
+        Platillo Favorito
+
+    </h2>
+
+    <br>
+
+    {% if favorito %}
+
+<h1 style="color:#ff6b35;">
+
+{{ favorito["producto"] }}
+
+</h1>
+
+<h3>
+
+{{ favorito["total"] }} productos vendidos
+
+</h3>
+
+{% else %}
+
+        <p>
+
+            No existen pedidos registrados.
+
+        </p>
+
+    {% endif %}
+
+</section>
+
+<!-- ====================================== -->
+<!-- VENTAS POR DÍA -->
+<!-- ====================================== -->
+
+<section class="hero-card" style="margin-top:40px;">
+
+    <h2>
+
+        <i class="fa-solid fa-chart-line"></i>
+
+        Ventas por Día
+
+    </h2>
+
+    <br>
+
+    <div style="max-width:850px;margin:auto;">
+
+        <canvas id="graficaVentas"></canvas>
+
+    </div>
+
+</section>
+
+<!-- ====================================== -->
+<!-- PLATILLOS MÁS VENDIDOS -->
+<!-- ====================================== -->
+
+<section class="hero-card" style="margin-top:40px;">
+
+    <h2>
+
+        <i class="fa-solid fa-chart-column"></i>
+
+        Platillos Más Vendidos
+
+    </h2>
+
+    <br>
+
+    <div style="max-width:800px;margin:auto;">
+
+        <canvas id="graficaPlatillos"></canvas>
+
+    </div>
+
+</section>
+
+<!-- ====================================== -->
+<!-- DATOS PARA JAVASCRIPT -->
+<!-- ====================================== -->
+
+<script>
+
+const datosDashboard = {
+
+    entregados: {{ entregados }},
+
+    cancelados: {{ cancelados }},
+
+    platillos: {{ platillos|tojson }},
+
+    ventasDia: {{ ventas_dia|tojson }}
+
+};
+
+</script>
+
+<!-- ====================================== -->
+<!-- JAVASCRIPT -->
+<!-- ====================================== -->
+
+<script src="{{ url_for('static', filename='js/dashboard_admin.js') }}"></script>
+
+{% endblock %}

@@ -1,0 +1,157 @@
+/* =====================================
+   SIGPET 2.0 - Responsive
+===================================== */
+
+/* =====================================
+   Pantallas grandes
+===================================== */
+
+@media (min-width:1400px){
+
+    main{
+
+        max-width:1300px;
+
+    }
+
+}
+
+/* =====================================
+   Tablets
+===================================== */
+
+@media (max-width:992px){
+
+    .hero-card{
+
+        max-width:100%;
+
+    }
+
+    .panel-cocina{
+
+        grid-template-columns:1fr;
+
+    }
+
+    .menu-item{
+
+        flex-direction:column;
+
+        align-items:flex-start;
+
+        gap:15px;
+
+    }
+
+}
+
+/* =====================================
+   Celulares
+===================================== */
+
+@media (max-width:768px){
+
+    header{
+
+        padding:20px;
+
+    }
+
+    .logo{
+
+        flex-direction:column;
+
+        text-align:center;
+
+    }
+
+    nav{
+
+        width:100%;
+
+        justify-content:center;
+
+    }
+
+    nav a{
+
+        flex:1;
+
+        text-align:center;
+
+    }
+
+    .card{
+
+        padding:25px;
+
+    }
+
+    .btn{
+
+        width:100%;
+
+    }
+
+}
+
+/* =====================================
+   Celulares pequeños
+===================================== */
+
+@media (max-width:480px){
+
+    html{
+
+        font-size:15px;
+
+    }
+
+    .logo img{
+
+        width:50px;
+
+        height:50px;
+
+    }
+
+    .logo h1{
+
+        font-size:1.7rem;
+
+    }
+
+    .hero-card{
+
+        padding:10px;
+
+    }
+
+    .card{
+
+        padding:20px;
+
+        border-radius:20px;
+
+    }
+
+    h1{
+
+        font-size:2rem;
+
+    }
+
+    h2{
+
+        font-size:1.5rem;
+
+    }
+
+    .menu-item span{
+
+        font-size:1rem;
+
+    }
+
+}

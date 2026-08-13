@@ -1,0 +1,901 @@
+/* ==========================================
+   SIGPET 2.0
+   Hoja principal de estilos
+========================================== */
+
+/* Variables */
+@import url("variables.css");
+
+/* Layout general */
+@import url("layout.css");
+
+/* Componentes */
+@import url("cards.css");
+@import url("buttons.css");
+@import url("forms.css");
+
+/* Animaciones */
+@import url("animations.css");
+
+/* Responsive */
+@import url("responsive.css");
+
+
+/* ==========================================
+   RESET GENERAL
+========================================== */
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+html{
+    scroll-behavior:smooth;
+}
+
+body{
+    font-family:'Poppins',sans-serif;
+    color:var(--color-texto);
+    background:var(--color-fondo);
+    min-height:100vh;
+    display:flex;
+    flex-direction:column;
+}
+
+
+/* ==========================================
+   CONTENIDO
+========================================== */
+
+main{
+
+    flex:1;
+
+    width:100%;
+
+}
+
+
+/* ==========================================
+   IMÁGENES
+========================================== */
+
+img{
+
+    max-width:100%;
+
+    display:block;
+
+}
+
+
+/* ==========================================
+   LINKS
+========================================== */
+
+a{
+
+    text-decoration:none;
+
+    color:inherit;
+
+}
+
+
+/* ==========================================
+   LISTAS
+========================================== */
+
+ul{
+
+    list-style:none;
+
+}
+
+
+/* ==========================================
+   BOTONES
+========================================== */
+
+button{
+
+    font-family:inherit;
+
+    border:none;
+
+    outline:none;
+
+    cursor:pointer;
+
+}
+
+
+/* ==========================================
+   INPUTS
+========================================== */
+
+input,
+textarea,
+select{
+
+    font-family:inherit;
+
+}
+
+
+/* ==========================================
+   SELECCIÓN DE TEXTO
+========================================== */
+
+::selection{
+
+    background:var(--color-primario);
+
+    color:white;
+
+}
+
+
+/* ==========================================
+   SCROLL SUAVE
+========================================== */
+
+html{
+
+    scroll-behavior:smooth;
+
+}
+
+.modal{
+
+    display:none;
+
+    position:fixed;
+
+    inset:0;
+
+    background:rgba(0,0,0,.55);
+
+    justify-content:center;
+
+    align-items:center;
+
+    z-index:9999;
+
+}
+
+.modal-contenido{
+
+    background:white;
+
+    width:420px;
+
+    padding:30px;
+
+    border-radius:20px;
+
+    box-shadow:0 20px 40px rgba(0,0,0,.25);
+
+}
+
+.modal-contenido select,
+.modal-contenido textarea{
+
+    width:100%;
+
+    margin-top:10px;
+
+}
+
+/*==========================================
+        HISTORIAL
+==========================================*/
+
+.tabla-historial{
+
+width:100%;
+
+border-collapse:collapse;
+
+margin-top:20px;
+
+}
+
+.tabla-historial th{
+
+background:#ff6b35;
+
+color:white;
+
+padding:15px;
+
+font-size:15px;
+
+}
+
+.tabla-historial td{
+
+padding:14px;
+
+text-align:center;
+
+border-bottom:1px solid rgba(255,255,255,.08);
+
+}
+
+.tabla-historial tr{
+
+transition:.25s;
+
+}
+
+.tabla-historial tr:hover{
+
+background:rgba(255,107,53,.08);
+
+}
+
+.historial-filtros{
+
+display:flex;
+
+gap:20px;
+
+justify-content:space-between;
+
+align-items:center;
+
+flex-wrap:wrap;
+
+}
+
+.historial-filtros input{
+
+flex:1;
+
+padding:12px;
+
+border-radius:10px;
+
+border:none;
+
+}
+
+.historial-filtros select{
+
+padding:12px;
+
+border-radius:10px;
+
+border:none;
+
+}
+
+.estado{
+
+padding:7px 14px;
+
+border-radius:30px;
+
+font-weight:bold;
+
+color:white;
+
+}
+
+.pendiente{
+
+background:#f39c12;
+
+}
+
+.preparando{
+
+background:#3498db;
+
+}
+
+.listo{
+
+background:#2ecc71;
+
+}
+
+.entregado{
+
+background:#27ae60;
+
+}
+
+.cancelado{
+
+background:#e74c3c;
+
+}
+
+/*=========================================
+      BOTONES DASHBOARD
+=========================================*/
+
+.dashboard-actions{
+
+    display:flex;
+
+    justify-content:center;
+
+    gap:20px;
+
+    margin-top:30px;
+
+    flex-wrap:wrap;
+
+}
+
+.dashboard-actions .btn{
+
+    min-width:190px;
+
+    text-align:center;
+
+    font-weight:600;
+
+}
+
+.password-box{
+    position:relative;
+}
+
+.password-box input{
+    width:100%;
+}
+
+.password-box i{
+
+    position:absolute;
+
+    top:50%;
+
+    right:18px;
+
+    transform:translateY(-50%);
+
+    cursor:pointer;
+
+    color:#777;
+
+    font-size:18px;
+
+}
+
+/*=========================================
+        TOAST SIGPET
+=========================================*/
+
+.toast{
+
+    position:fixed;
+
+    top:25px;
+
+    right:25px;
+
+    min-width:320px;
+
+    max-width:420px;
+
+    padding:18px;
+
+    border-radius:12px;
+
+    color:#fff;
+
+    font-weight:bold;
+
+    font-size:16px;
+
+    box-shadow:0 12px 30px rgba(0,0,0,.25);
+
+    transform:translateX(500px);
+
+    opacity:0;
+
+    transition:.4s;
+
+    z-index:99999;
+
+}
+
+.toast.mostrar{
+
+    transform:translateX(0);
+
+    opacity:1;
+
+}
+
+.toast.pendiente{
+
+    background:#ff9800;
+
+}
+
+.toast.preparando{
+
+    background:#ffc107;
+
+    color:#222;
+
+}
+
+.toast.listo{
+
+    background:#28a745;
+
+}
+
+.toast.entregado{
+
+    background:#0d6efd;
+
+}
+
+.toast.cancelado{
+
+    background:#dc3545;
+
+}
+
+/* ==========================================
+   NUEVO PEDIDO - SIGPET 2.0
+========================================== */
+
+.pedido-contenedor{
+    max-width: 1200px;
+    margin: 40px auto;
+    padding: 0 25px;
+
+    display: grid;
+    grid-template-columns: 1.6fr 1fr;
+    gap: 30px;
+
+    align-items: start;
+}
+
+
+/* ==========================================
+   ENCABEZADO
+========================================== */
+
+.pedido-encabezado{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    margin-bottom: 25px;
+}
+
+.pedido-etiqueta{
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+
+    font-size: 12px;
+    font-weight: bold;
+
+    padding: 8px 14px;
+    border-radius: 20px;
+
+    background: rgba(52, 152, 219, 0.12);
+}
+
+.pedido-encabezado h2{
+    margin: 12px 0 5px;
+}
+
+.pedido-encabezado p{
+    opacity: .75;
+}
+
+.pedido-icono{
+    width: 70px;
+    height: 70px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    font-size: 30px;
+
+    border-radius: 20px;
+
+    background: rgba(52, 152, 219, 0.1);
+}
+
+
+/* ==========================================
+   GRID DE PRODUCTOS
+========================================== */
+
+.productos-grid{
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 18px;
+}
+
+
+/* ==========================================
+   TARJETA PRODUCTO
+========================================== */
+
+.producto{
+    padding: 20px;
+
+    border-radius: 18px;
+
+    background: rgba(255,255,255,0.04);
+
+    border: 1px solid rgba(255,255,255,0.08);
+
+    transition: .25s ease;
+}
+
+.producto:hover{
+    transform: translateY(-5px);
+
+    border-color: rgba(52, 152, 219, 0.5);
+}
+
+
+/* ==========================================
+   INFORMACIÓN DEL PRODUCTO
+========================================== */
+
+.producto-info{
+    display: flex;
+    gap: 14px;
+    align-items: center;
+}
+
+.producto-icono{
+    width: 55px;
+    height: 55px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    font-size: 28px;
+
+    border-radius: 15px;
+
+    background: rgba(255,255,255,0.06);
+}
+
+.producto h3{
+    margin: 0;
+}
+
+.producto-descripcion{
+    font-size: 13px;
+    opacity: .65;
+    margin-top: 5px;
+}
+
+
+/* ==========================================
+   PIE DEL PRODUCTO
+========================================== */
+
+.producto-footer{
+    margin-top: 20px;
+
+    display: flex;
+    flex-wrap: wrap;
+
+    gap: 12px;
+
+    align-items: center;
+}
+
+.precio{
+    font-size: 20px;
+    font-weight: bold;
+
+    margin-right: auto;
+}
+
+
+/* ==========================================
+   CONTROL DE CANTIDAD
+========================================== */
+
+.cantidad{
+    display: flex;
+    align-items: center;
+
+    border-radius: 12px;
+
+    overflow: hidden;
+
+    border: 1px solid rgba(255,255,255,0.1);
+}
+
+.cantidad button{
+    width: 35px;
+    height: 35px;
+
+    border: none;
+
+    cursor: pointer;
+
+    background: transparent;
+
+    font-size: 13px;
+
+    color: inherit;
+}
+
+.cantidad button:hover{
+    background: rgba(255,255,255,0.08);
+}
+
+.cantidad-input {
+    width: 42px !important;
+    min-width: 42px !important;
+    height: 38px;
+
+    display: block !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+
+    text-align: center;
+    border: none;
+    background: transparent;
+
+    color: #1f2937 !important;
+    font-size: 16px;
+    font-weight: 700;
+
+    outline: none;
+    appearance: textfield;
+    -moz-appearance: textfield;
+}
+
+.cantidad-input::-webkit-inner-spin-button,
+.cantidad-input::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+
+/* ==========================================
+   BOTÓN AGREGAR
+========================================== */
+
+.agregar{
+    border: none;
+
+    padding: 10px 16px;
+
+    border-radius: 10px;
+
+    cursor: pointer;
+
+    font-weight: bold;
+
+    transition: .2s;
+}
+
+.agregar:hover{
+    transform: scale(1.04);
+}
+
+@media(max-width: 900px){
+
+    .pedido-contenedor{
+        grid-template-columns: 1fr;
+    }
+
+}
+
+
+@media(max-width: 600px){
+
+    .productos-grid{
+        grid-template-columns: 1fr;
+    }
+
+    .pedido-contenedor{
+        padding: 0 15px;
+    }
+
+}
+
+.cantidad-input {
+    width: 50px !important;
+    min-width: 50px !important;
+    height: 44px !important;
+
+    display: block !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+
+    text-align: center !important;
+    line-height: 44px !important;
+
+    padding: 0 !important;
+    margin: 0 !important;
+
+    border: 2px solid #ff6b35 !important;
+    border-radius: 8px !important;
+    background: #ffffff !important;
+
+    color: #1f2937 !important;
+    font-size: 18px !important;
+    font-weight: 700 !important;
+
+    outline: none !important;
+    appearance: textfield;
+    -moz-appearance: textfield;
+    box-sizing: border-box !important;
+}
+
+.cantidad-input::-webkit-inner-spin-button,
+.cantidad-input::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+.control-musica {
+    position: fixed;
+    bottom: 90px;
+    right: 25px;
+
+    width: 50px;
+    height: 50px;
+
+    border: none;
+    border-radius: 50%;
+
+    cursor: pointer;
+
+    z-index: 9999;
+}
+
+/* ==========================================
+   🎵 CONTROLADOR DE MÚSICA
+========================================== */
+
+.music-player {
+    position: fixed;
+
+    right: 30px;
+    bottom: 30px;
+
+    display: flex;
+    align-items: center;
+    gap: 12px;
+
+    background: rgba(255, 255, 255, 0.95);
+
+    padding: 12px 18px;
+
+    border-radius: 50px;
+
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+
+    z-index: 9999;
+
+    transition: all 0.3s ease;
+}
+
+
+/* BOTÓN */
+
+.music-btn {
+    width: 48px;
+    height: 48px;
+
+    border: none;
+
+    border-radius: 50%;
+
+    background: #ff6b35;
+    color: white;
+
+    font-size: 18px;
+
+    cursor: pointer;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    transition: 0.3s;
+}
+
+.music-btn:hover {
+    transform: scale(1.08);
+}
+
+/* ==========================================
+   SLIDER DE VOLUMEN PERSONALIZADO
+========================================== */
+
+#volumenMusica {
+    width: 150px;
+    height: 8px;
+
+    appearance: none;
+    -webkit-appearance: none;
+
+    background: #3b3b3b;
+
+    border-radius: 20px;
+
+    cursor: pointer;
+
+    outline: none;
+
+    padding: 0;
+}
+
+
+/* Chrome / Edge / Opera */
+
+#volumenMusica::-webkit-slider-runnable-track {
+    width: 100%;
+    height: 8px;
+
+    background: #3b3b3b;
+
+    border-radius: 20px;
+}
+
+
+/* Botón del slider */
+
+#volumenMusica::-webkit-slider-thumb {
+
+    appearance: none;
+    -webkit-appearance: none;
+
+    width: 16px;
+    height: 16px;
+
+    background: #ff6b35;
+
+    border-radius: 50%;
+
+    cursor: pointer;
+
+    margin-top: -4px;
+}
+
+
+/* Firefox */
+
+#volumenMusica::-moz-range-track {
+    height: 8px;
+
+    background: #3b3b3b;
+
+    border-radius: 20px;
+}
+
+
+#volumenMusica::-moz-range-thumb {
+
+    width: 16px;
+    height: 16px;
+
+    background: #ff6b35;
+
+    border: none;
+
+    border-radius: 50%;
+
+    cursor: pointer;
+}

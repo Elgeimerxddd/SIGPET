@@ -1,79 +1,131 @@
-<!DOCTYPE html>
-<html>
+{% extends "base.html" %}
 
-<head>
+{% block title %}
+Pedido Confirmado | SIGPET
+{% endblock %}
 
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+{% block content %}
 
-<link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+<section class="card hero-card">
 
-<title>Pedido confirmado</title>
+    <div style="font-size:70px; color:var(--color-exito); margin-bottom:20px;">
 
-</head>
+        <i class="fa-solid fa-circle-check"></i>
 
-<body>
+    </div>
 
-<header>
+    <h1>¡Pedido Registrado!</h1>
 
-<h2>SIGPET</h2>
+    <p style="margin-bottom:35px;">
+        Tu pedido fue enviado correctamente a cocina.
+    </p>
 
-<nav>
-<a href="/">Inicio</a>
-<a href="/menu">Menú</a>
-<a href="/consultar">Consultar pedido</a>
-<a href="/cocina">Cocina</a>
-</nav>
+    <!-- Número de pedido -->
 
-</header>
+    <div class="menu-item">
 
+        <span>
+            <i class="fa-solid fa-hashtag"></i>
+            Número de Pedido
+        </span>
 
-<main>
+        <strong>#{{ numero_pedido }}</strong>
 
-<div class="card">
+    </div>
 
-<h1>Pedido registrado</h1>
+    <!-- Cliente -->
 
-<p>Tu número de pedido es:</p>
+    <div class="menu-item">
 
-<h1 class="numero-pedido">
-#{{numero_pedido}}
-</h1>
+        <span>
+            <i class="fa-solid fa-user"></i>
+            Cliente
+        </span>
 
-<p><strong>Tiempo estimado:</strong> {{tiempo_estimado}} minutos</p>
+        <strong>{{ cliente }}</strong>
 
-<p><strong>Hora del pedido:</strong> {{hora}}</p>
+    </div>
 
-<p><strong>Nombre:</strong> {{nombre}}</p>
+    <!-- Productos -->
 
-<p><strong>Platillo:</strong> {{platillo}}</p>
+    <div class="menu-item" style="display:block; text-align:left;">
 
-<p><strong>Cantidad:</strong> {{cantidad}}</p>
+        <span>
+            <i class="fa-solid fa-burger"></i>
+            Productos
+        </span>
 
-<p>Muestra este número al llegar al local.</p>
+        <br><br>
 
-<br>
+        {% for producto in productos %}
 
-<a href="/">
-<button>Volver al inicio</button>
-</a>
+            <div style="padding:12px; border-radius:10px; background:#f7f7f7; margin-bottom:10px;">
 
-<br><br>
+                <strong>{{ producto.nombre }}</strong>
 
-<a href="/menu">
-<button>Hacer otro pedido</button>
-</a>
+                <br>
 
-</div>
+                Cantidad:
+                <strong>{{ producto.cantidad }}</strong>
 
-</main>
+                <br>
 
+                Precio:
+                <strong>${{ producto.precio }}</strong>
 
-<footer>
+                <br>
 
-<p>SIGPET - Sistema de pedidos en línea</p>
+                Subtotal:
+                <strong>${{ producto.subtotal }}</strong>
 
-</footer>
+            </div>
 
-</body>
+        {% endfor %}
 
-</html>
+    </div>
+
+    <!-- Total -->
+
+    <div class="menu-item">
+
+        <span>
+
+            <i class="fa-solid fa-dollar-sign"></i>
+
+            Total
+
+        </span>
+
+        <strong style="font-size:22px; color:var(--color-primario);">
+
+            ${{ total }}
+
+        </strong>
+
+    </div>
+
+    <!-- Botones -->
+
+    <div style="margin-top:35px; display:flex; gap:15px; flex-wrap:wrap; justify-content:center;">
+
+        <a href="/consultar" class="btn btn-secundario">
+
+            <i class="fa-solid fa-magnifying-glass"></i>
+
+            Consultar Pedido
+
+        </a>
+
+        <a href="/menu" class="btn">
+
+            <i class="fa-solid fa-utensils"></i>
+
+            Volver al Menú
+
+        </a>
+
+    </div>
+
+</section>
+
+{% endblock %}

@@ -1,63 +1,527 @@
-<!DOCTYPE html>
-<html>
+{% extends "base.html" %}
 
-<head>
+{% block title %}
+Estado del Pedido | SIGPET
+{% endblock %}
 
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-<link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
-
-<title>Estado del pedido</title>
-</head>
-
-<body>
-
-<a href="/">Inicio</a>
-<a href="/menu">Menú</a>
-<a href="/consultar">Consultar pedido</a>
-
-<h1>Estado del pedido</h1>
+{% block content %}
 
 {% if pedido %}
 
-<p><strong>Pedido #{{pedido[0]}}</strong></p>
+<section class="card hero-card">
 
-<p>Nombre: {{pedido[1]}}</p>
+    <div style="font-size:65px; color:var(--color-secundario); margin-bottom:20px;">
+        <i class="fa-solid fa-clipboard-check"></i>
+    </div>
 
-<p>Platillo: {{pedido[2]}}</p>
+    <h1>Estado de tu Pedido</h1>
 
-<p>Cantidad: {{pedido[3]}}</p>
+    <p style="margin-bottom:35px;">
+        Consulta la información actual de tu pedido.
+    </p>
 
-<p>Estado: <span id="estado">{{pedido[4]}}</span></p>
+    <div class="menu-item">
 
-<p>Tiempo estimado: {{pedido[5]}} minutos</p>
+    <span>
+        <i class="fa-solid fa-hashtag"></i>
+        Número de Pedido
+    </span>
 
-{% else %}
+    <strong>
 
-<p>No se encontró el pedido.</p>
+        #{{ pedido["id"] }}
 
-<a href="/consultar">Intentar nuevamente</a>
+    </strong>
 
-{% endif %}
+</div>
+
+<div class="menu-item">
+
+    <span>
+        <i class="fa-solid fa-user"></i>
+        Cliente
+    </span>
+
+    <strong>
+
+        {{ pedido["cliente"] }}
+
+    </strong>
+
+</div>
+
+<div class="menu-item">
+
+    <span>
+        <i class="fa-solid fa-utensils"></i>
+        Productos
+    </span>
+
+    <strong style="white-space:pre-line;">
+
+        {{ pedido["productos"] }}
+
+    </strong>
+
+</div>
+
+<div class="menu-item">
+
+    <span>
+        <i class="fa-solid fa-layer-group"></i>
+        Cantidad Total
+    </span>
+
+    <strong>
+
+        {{ pedido["cantidad"] }}
+
+    </strong>
+
+</div>
+
+<div class="menu-item">
+
+    <span>
+        <i class="fa-solid fa-clock"></i>
+        Tiempo Estimado
+    </span>
+
+    <strong>
+
+        {{ pedido["tiempo"] }} minutos
+
+    </strong>
+
+</div>
+
+<div class="menu-item">
+
+    <span>
+        <i class="fa-solid fa-truck-fast"></i>
+        Estado
+    </span>
+
+    <strong
+    id="estadoPedido"
+    style="font-size:22px;font-weight:bold;">
+
+        {{ pedido["estado"] }}
+
+    </strong>
+
+</div>
+
+<div class="menu-item">
+
+    <span>
+        <i class="fa-solid fa-calendar-days"></i>
+        Fecha
+    </span>
+
+    <strong>
+
+        {{ pedido["fecha"] }}
+
+    </strong>
+
+</div>
+
+<div class="menu-item">
+
+    <span>
+        <i class="fa-solid fa-clock"></i>
+        Hora
+    </span>
+
+    <strong>
+
+        {{ pedido["hora"] }}
+
+    </strong>
+
+</div>
+
+<div class="menu-item">
+
+    <span>
+        <i class="fa-solid fa-money-bill-wave"></i>
+        Total
+    </span>
+
+    <strong>
+
+        ${{ "%.2f"|format(pedido["total"]) }}
+
+    </strong>
+
+</div>
+
+    </div>
+
+    <div id="infoCancelacion" style="display:none; margin-top:25px;">
+
+    <div class="menu-item">
+
+        <span>
+
+            <i class="fa-solid fa-circle-xmark"></i>
+
+            Motivo
+
+        </span>
+
+        <strong id="motivoPedido"></strong>
+
+    </div>
+
+    <div class="menu-item">
+
+        <span>
+
+            <i class="fa-solid fa-user-shield"></i>
+
+            Cancelado por
+
+        </span>
+
+        <strong id="canceladoPor"></strong>
+
+    </div>
+
+    <div class="menu-item">
+
+        <span>
+
+            <i class="fa-solid fa-calendar-days"></i>
+
+            Fecha
+
+        </span>
+
+        <strong id="fechaCancelacion"></strong>
+
+    </div>
+
+</div>
+
+    <div style="margin-top:35px; display:flex; gap:15px; justify-content:center; flex-wrap:wrap;">
+
+    {% if pedido["estado"] != "Entregado" and pedido["estado"] != "Cancelado" %}
+
+    <button
+    id="btnCancelar"
+    class="btn btn-error"
+    onclick="abrirCancelarCliente()">
+
+    <i class="fa-solid fa-ban"></i>
+
+    Cancelar Pedido
+
+    </button>
+
+    {% endif %}
+
+    <a href="/consultar" class="btn btn-secundario">
+
+        <i class="fa-solid fa-arrow-left"></i>
+
+        Realizar otra consulta
+
+    </a>
+
+</div>
+
+</section>
+
+<div id="modalCancelarCliente" class="modal">
+
+    <div class="modal-contenido">
+
+        <h2>Cancelar Pedido</h2>
+
+        <form id="formCancelarCliente">
+
+            <select id="motivoCliente" required>
+
+                <option value="">Selecciona un motivo</option>
+
+                <option>Me equivoqué de pedido</option>
+
+                <option>Ya no lo quiero</option>
+
+                <option>Cambié de opinión</option>
+
+                <option>Pedí por error</option>
+
+                <option value="Otro">Otro motivo...</option>
+
+            </select>
+
+            <textarea
+                id="otroMotivoCliente"
+                placeholder="Escribe el motivo..."
+                style="display:none;"></textarea>
+
+            <br><br>
+
+            <button class="btn btn-error">
+
+                Confirmar Cancelación
+
+            </button>
+
+            <button
+                type="button"
+                class="btn btn-secundario"
+                onclick="cerrarCancelarCliente()">
+
+                Cerrar
+
+            </button>
+
+        </form>
+
+    </div>
+
+</div>
 
 <script>
 
-function actualizarEstado(){
+const pedidoID = Number("{{ pedido['id'] }}");
 
-fetch("/estado/{{pedido[0]}}")
-.then(response => response.json())
-.then(data => {
+let ultimoEstado = "";
 
-document.getElementById("estado").innerText = data.estado;
+function mostrarToast(mensaje,tipo){
 
-});
+    const toast=document.getElementById("toast");
+
+    toast.className="toast "+tipo;
+
+    toast.innerHTML=mensaje;
+
+    toast.classList.add("mostrar");
+
+    setTimeout(()=>{
+
+        toast.classList.remove("mostrar");
+
+    },4000);
 
 }
 
-setInterval(actualizarEstado, 5000);
+async function actualizarEstado(){
+
+    try{
+
+        const respuesta = await fetch(`/estado/${pedidoID}`);
+
+        const datos = await respuesta.json();
+
+        const estado = document.getElementById("estadoPedido");
+
+        const botonCancelar = document.getElementById("btnCancelar");
+
+        if(!estado) return;
+
+        estado.textContent = datos.estado;
+
+        if (ultimoEstado !== "" && ultimoEstado !== datos.estado) {
+
+    switch (datos.estado) {
+
+        case "Preparando":
+            mostrarToast(
+"👨‍🍳 Tu pedido ya está siendo preparado.",
+"preparando"
+);
+            break;
+
+        case "Listo":
+            mostrarToast(
+"🎉 <b>¡Tu pedido está listo para recoger!</b>",
+"listo"
+);
+            break;
+
+        case "Entregado":
+            mostrarToast(
+"❤️ <b>Pedido entregado</b><br>Gracias por usar SIGPET.",
+"entregado"
+);
+            break;
+
+        case "Cancelado":
+            mostrarToast(
+"❌ <b>Pedido cancelado</b><br>"+
+(datos.motivo_cancelacion||"Sin motivo"),
+"cancelado"
+);
+            break;
+
+    }
+
+}
+
+ultimoEstado = datos.estado;
+
+estado.className = "";
+
+switch(datos.estado){
+
+    case "Pendiente":
+        estado.style.color="#ff9800";
+        break;
+
+    case "Preparando":
+        estado.style.color="#ffc107";
+        break;
+
+    case "Listo":
+
+    estado.style.color = "#28a745";
+
+    break;
+
+    case "Entregado":
+        estado.style.color="#007bff";
+
+        if(botonCancelar){
+            botonCancelar.style.display="none";
+        }
+
+        break;
+
+    case "Cancelado":
+        estado.style.color="#dc3545";
+
+        if(botonCancelar){
+            botonCancelar.style.display="none";
+        }
+
+        document.getElementById("infoCancelacion").style.display="block";
+
+        document.getElementById("motivoPedido").textContent =
+            datos.motivo_cancelacion || "Sin especificar";
+
+        document.getElementById("canceladoPor").textContent =
+            datos.cancelado_por || "No disponible";
+
+        document.getElementById("fechaCancelacion").textContent =
+            datos.fecha_cancelacion || "No disponible";
+
+        break;
+}
+
+    }catch(error){
+
+        console.error(error);
+
+    }
+
+}
+
+actualizarEstado();
+
+setInterval(actualizarEstado,3000);
+
+function abrirCancelarCliente(){
+
+    document.getElementById("modalCancelarCliente").style.display="flex";
+
+}
+
+function cerrarCancelarCliente(){
+
+    document.getElementById("modalCancelarCliente").style.display="none";
+
+}
+
+document.getElementById("motivoCliente").addEventListener("change",function(){
+
+    const otro=document.getElementById("otroMotivoCliente");
+
+    if(this.value=="Otro"){
+
+        otro.style.display="block";
+
+    }else{
+
+        otro.style.display="none";
+
+    }
+
+});
+
+document.getElementById("formCancelarCliente").addEventListener("submit",async function(e){
+
+    e.preventDefault();
+
+    let motivo=document.getElementById("motivoCliente").value;
+
+    if(motivo=="Otro"){
+
+        motivo=document.getElementById("otroMotivoCliente").value;
+
+    }
+
+    await fetch(`/cancelar_cliente/${pedidoID}`,{
+
+    method:"POST",
+
+    headers:{
+        "Content-Type":"application/json"
+    },
+
+    body:JSON.stringify({
+        motivo:motivo
+    })
+
+});
+
+cerrarCancelarCliente();
+
+actualizarEstado();
+
+const boton=document.querySelector(".btn-error");
+
+if(boton){
+
+    boton.style.display="none";
+
+}
+
+});
 
 </script>
 
-</body>
+{% else %}
 
-</html>
+<section class="card hero-card">
+
+    <div style="font-size:65px; color:var(--color-error); margin-bottom:20px;">
+        <i class="fa-solid fa-circle-xmark"></i>
+    </div>
+
+    <h1>Pedido no encontrado</h1>
+
+    <p>No existe un pedido con ese número.</p>
+
+    <br>
+
+    <a href="/consultar" class="btn">
+        <i class="fa-solid fa-arrow-left"></i>
+        Intentar nuevamente
+    </a>
+
+</section>
+
+{% endif %}
+
+<!-- ===================================== -->
+<!-- NOTIFICACIONES -->
+<!-- ===================================== -->
+
+<div id="toast" class="toast"></div>
+
+{% endblock %}

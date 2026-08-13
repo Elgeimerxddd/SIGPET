@@ -1,50 +1,44 @@
-<!DOCTYPE html>
-<html lang="es">
+{% extends "base.html" %}
+{% block title %}
+Bienvenido | SIGPET
+{% endblock %}
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SIGPET</title>
+{% block content %}
 
-    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
-</head>
+<section class="card hero-card">
 
-<body>
+    <div class="hero-icon">
 
-<header>
+        <i class="fa-solid fa-bowl-food"></i>
 
-<h2>SIGPET</h2>
+    </div>
 
-<nav>
-<a href="/">Inicio</a>
-<a href="/menu">Menú</a>
-<a href="/consultar">Consultar pedido</a>
-<a href="/cocina">Cocina</a>
-</nav>
+    <h1>Bienvenido a SIGPET</h1>
 
-</header>
+    <p>
 
-<main>
+        Sistema Inteligente para la Gestión de Pedidos.
 
-<div class="card">
+    </p>
 
-<h1>Bienvenido a SIGPET</h1>
+    <p>
 
-<p>Sistema de pedidos en línea</p>
+        Realiza tus pedidos de manera rápida y consulta su estado en tiempo real.
 
-<a href="/opciones">
-<button>Comenzar</button>
-</a>
+    </p>
 
-</div>
+    <div class="hero-buttons">
 
-</main>
+        <a href="/opciones" class="btn btn-grande">
 
-<footer>
+            <i class="fa-solid fa-arrow-right"></i>
 
-<p>SIGPET - Sistema de pedidos en línea</p>
+            Comenzar
 
-</footer>
+        </a>
 
-</body>
-</html>
+    </div>
+
+</section>
+
+{% endblock %}

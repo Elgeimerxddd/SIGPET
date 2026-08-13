@@ -1,63 +1,97 @@
-<!DOCTYPE html>
-<html>
+{% extends "base.html" %}
 
-<head>
+{% block title %}
+Opciones | SIGPET
+{% endblock %}
 
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+{% block content %}
 
-<meta charset="UTF-8">
+<section class="card hero-card">
 
-<link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <div class="hero-icon">
 
-<title>Opciones | SIGPET</title>
+        <i class="fa-solid fa-list"></i>
 
-</head>
+    </div>
 
-<body>
+    <h1>Menú Principal</h1>
 
-<header>
+    <p>
 
-<h1>SIGPET</h1>
+        Selecciona la opción que deseas utilizar.
 
-<nav>
-<a href="/">Inicio</a>
-<a href="/menu">Menú</a>
-<a href="/consultar">Consultar pedido</a>
-<a href="/cocina">Cocina</a>
-</nav>
+    </p>
 
-</header>
+</section>
 
-<main>
+<div class="panel-opciones">
 
-<div class="card">
+    <div class="card opcion-card">
 
-<h2>Opciones</h2>
+        <i class="fa-solid fa-burger fa-3x"></i>
 
-<p>Selecciona una opción</p>
+        <h2>Realizar Pedido</h2>
 
-<br>
+        <p>
 
-<a href="/menu">
-<button class="btn-principal">Ver menú</button>
-</a>
+            Registra un nuevo pedido desde el menú disponible.
 
-<br><br>
+        </p>
 
-<a href="/pedido">
-<button class="btn-principal">Realizar pedido</button>
-</a>
+        <a href="/menu" class="btn">
+
+            <i class="fa-solid fa-arrow-right"></i>
+
+            Entrar
+
+        </a>
+
+    </div>
+
+    <div class="card opcion-card">
+
+        <i class="fa-solid fa-magnifying-glass fa-3x"></i>
+
+        <h2>Consultar Pedido</h2>
+
+        <p>
+
+            Consulta el estado actual de cualquier pedido.
+
+        </p>
+
+        <a href="/consultar" class="btn btn-secundario">
+
+            <i class="fa-solid fa-arrow-right"></i>
+
+            Entrar
+
+        </a>
+
+    </div>
+
+    <div class="card opcion-card">
+
+        <i class="fa-solid fa-kitchen-set fa-3x"></i>
+
+        <h2>Panel de Cocina</h2>
+
+        <p>
+
+            Administra los pedidos y actualiza su estado.
+
+        </p>
+
+        <a href="/cocina" class="btn btn-advertencia">
+
+            <i class="fa-solid fa-arrow-right"></i>
+
+            Entrar
+
+        </a>
+
+    </div>
 
 </div>
 
-</main>
-
-<footer>
-
-<p>SIGPET — Sistema de gestión de pedidos</p>
-
-</footer>
-
-</body>
-
-</html>
+{% endblock %}

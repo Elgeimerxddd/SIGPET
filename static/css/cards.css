@@ -1,0 +1,346 @@
+/* ==========================================
+   SIGPET 3.0
+   Cards
+========================================== */
+
+/*==============================
+    CARD GENERAL
+===============================*/
+
+.card{
+
+    background:var(--color-superficie);
+
+    border-radius:22px;
+
+    box-shadow:var(--sombra);
+
+    transition:.30s;
+
+}
+
+.card:hover{
+
+    transform:translateY(-4px);
+
+    box-shadow:var(--sombra-lg);
+
+}
+
+/*==============================
+    HERO
+===============================*/
+
+.hero-card{
+
+    max-width:700px;
+
+    margin:auto;
+
+    padding:45px;
+
+    text-align:center;
+
+}
+
+.hero-card i{
+
+    margin-bottom:25px;
+
+}
+
+.hero-card h1{
+
+    margin-bottom:15px;
+
+}
+
+.hero-card p{
+
+    color:var(--color-texto-secundario);
+
+    margin-bottom:35px;
+
+}
+
+/*==============================
+    MENU
+===============================*/
+
+.menu-item{
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+
+    padding:18px 22px;
+
+    margin:15px 0;
+
+    background:#F8FAFC;
+
+    border-radius:15px;
+
+    transition:.25s;
+
+    border:1px solid #E6EDF5;
+
+}
+
+.menu-item:hover{
+
+    transform:translateX(8px);
+
+    background:#EDF5FF;
+
+}
+
+.menu-item span{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:10px;
+
+    font-weight:600;
+
+}
+
+.menu-item strong{
+
+    color:var(--color-primario);
+
+    font-size:1.15rem;
+
+}
+
+/*==============================
+    PANEL COCINA
+===============================*/
+
+.panel-cocina{
+
+    display:grid;
+
+    grid-template-columns:repeat(auto-fit,minmax(360px,1fr));
+
+    gap:25px;
+
+    margin-top:35px;
+
+}
+
+/*==============================
+    PEDIDOS
+===============================*/
+
+.pedido-card{
+
+    padding:25px;
+
+}
+
+.pedido-card h2{
+
+    color:var(--color-secundario);
+
+    margin-bottom:18px;
+
+    font-size:1.3rem;
+
+}
+
+.pedido-card p{
+
+    margin:10px 0;
+
+}
+
+.estado{
+
+    display:inline-block;
+
+    padding:6px 14px;
+
+    border-radius:30px;
+
+    background:#EEF5FF;
+
+    color:var(--color-secundario);
+
+    font-weight:600;
+
+    margin-left:6px;
+
+}
+
+/*==============================
+    BOTONES COCINA
+===============================*/
+
+.botones-cocina{
+
+    display:flex;
+
+    gap:10px;
+
+    flex-wrap:wrap;
+
+    margin-top:20px;
+
+}
+
+.botones-cocina .btn{
+
+    flex:1;
+
+    min-width:120px;
+
+}
+
+/*==============================
+    FORMULARIOS
+===============================*/
+
+.card form{
+
+    margin-top:25px;
+
+}
+
+/*==============================
+    RESULTADOS
+===============================*/
+
+.card-info{
+
+    display:flex;
+
+    flex-direction:column;
+
+    gap:15px;
+
+}
+
+.card-info p{
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+
+}
+
+/*==============================
+    RESPONSIVE
+===============================*/
+
+@media(max-width:768px){
+
+    .hero-card{
+
+        padding:30px 25px;
+
+    }
+
+    .panel-cocina{
+
+        grid-template-columns:1fr;
+
+    }
+
+    .botones-cocina{
+
+        flex-direction:column;
+
+    }
+
+}
+
+/*==============================
+    HERO
+==============================*/
+
+.hero-icon{
+
+    font-size:75px;
+
+    color:var(--color-primario);
+
+    margin-bottom:25px;
+
+}
+
+.hero-buttons{
+
+    margin-top:35px;
+
+    display:flex;
+
+    justify-content:center;
+
+    gap:15px;
+
+    flex-wrap:wrap;
+
+}
+
+/*==================================
+    OPCIONES
+==================================*/
+
+.panel-opciones{
+
+    display:grid;
+
+    grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
+
+    gap:30px;
+
+    margin-top:40px;
+
+}
+
+.opcion-card{
+
+    padding:35px;
+
+    text-align:center;
+
+    transition:.30s;
+
+}
+
+.opcion-card:hover{
+
+    transform:translateY(-8px);
+
+    box-shadow:var(--sombra-lg);
+
+}
+
+.opcion-card i{
+
+    color:var(--color-primario);
+
+    margin-bottom:20px;
+
+}
+
+.opcion-card h2{
+
+    margin-bottom:15px;
+
+}
+
+.opcion-card p{
+
+    margin-bottom:25px;
+
+    color:var(--color-texto-secundario);
+
+}

@@ -1,0 +1,236 @@
+/* ==========================================
+   SIGPET 3.0
+   Botones
+========================================== */
+
+/*==============================
+    BOTÓN BASE
+===============================*/
+
+.btn{
+
+    display:inline-flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    gap:10px;
+
+    padding:14px 28px;
+
+    border:none;
+
+    border-radius:14px;
+
+    font-size:1rem;
+
+    font-weight:600;
+
+    font-family:inherit;
+
+    cursor:pointer;
+
+    color:#fff;
+
+    text-decoration:none;
+
+    transition:all .25s ease;
+
+    background:linear-gradient(
+        135deg,
+        var(--color-primario),
+        var(--color-primario-hover)
+    );
+
+    box-shadow:0 8px 18px rgba(255,107,53,.25);
+
+}
+
+/*==============================
+    HOVER
+===============================*/
+
+.btn:hover{
+
+    transform:translateY(-3px);
+
+    box-shadow:0 15px 28px rgba(255,107,53,.35);
+
+}
+
+/*==============================
+    CLICK
+===============================*/
+
+.btn:active{
+
+    transform:scale(.97);
+
+}
+
+/*==============================
+    ICONOS
+===============================*/
+
+.btn i{
+
+    font-size:.95rem;
+
+}
+
+/*==============================
+    BOTÓN GRANDE
+===============================*/
+
+.btn-grande{
+
+    padding:16px 34px;
+
+    font-size:1.05rem;
+
+}
+
+/*==============================
+    SECUNDARIO
+===============================*/
+
+.btn-secundario{
+
+    background:linear-gradient(
+
+        135deg,
+
+        var(--color-secundario),
+
+        var(--color-secundario-hover)
+
+    );
+
+    box-shadow:0 8px 18px rgba(13,59,120,.25);
+
+}
+
+.btn-secundario:hover{
+
+    box-shadow:0 15px 30px rgba(13,59,120,.35);
+
+}
+
+/*==============================
+    ÉXITO
+===============================*/
+
+.btn-exito{
+
+    background:linear-gradient(
+
+        135deg,
+
+        #22C55E,
+
+        #16A34A
+
+    );
+
+    box-shadow:0 8px 18px rgba(34,197,94,.25);
+
+}
+
+.btn-exito:hover{
+
+    box-shadow:0 15px 30px rgba(34,197,94,.35);
+
+}
+
+/*==============================
+    ADVERTENCIA
+===============================*/
+
+.btn-advertencia{
+
+    background:linear-gradient(
+
+        135deg,
+
+        #F59E0B,
+
+        #D97706
+
+    );
+
+    box-shadow:0 8px 18px rgba(245,158,11,.25);
+
+}
+
+.btn-advertencia:hover{
+
+    box-shadow:0 15px 30px rgba(245,158,11,.35);
+
+}
+
+/*==============================
+    ERROR
+===============================*/
+
+.btn-error{
+
+    background:linear-gradient(
+
+        135deg,
+
+        #EF4444,
+
+        #DC2626
+
+    );
+
+    box-shadow:0 8px 18px rgba(239,68,68,.25);
+
+}
+
+.btn-error:hover{
+
+    box-shadow:0 15px 30px rgba(239,68,68,.35);
+
+}
+
+/*==============================
+    BOTÓN BLOQUE
+===============================*/
+
+.btn-block{
+
+    width:100%;
+
+}
+
+/*==============================
+    DESHABILITADO
+===============================*/
+
+.btn:disabled{
+
+    opacity:.6;
+
+    cursor:not-allowed;
+
+    transform:none;
+
+    box-shadow:none;
+
+}
+
+/*==============================
+    RESPONSIVE
+===============================*/
+
+@media(max-width:768px){
+
+    .btn{
+
+        width:100%;
+
+    }
+
+}

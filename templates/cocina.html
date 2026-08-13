@@ -1,89 +1,301 @@
-<!DOCTYPE html>
-<html>
+{% extends "base.html" %}
 
-<head>
+{% block title %}
+Panel de Cocina | SIGPET
+{% endblock %}
 
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
-<meta http-equiv="refresh" content="5">
+{% block content %}
 
-<title>Panel de cocina</title>
+<section class="hero-card">
 
-</head>
+    <i class="fa-solid fa-kitchen-set fa-4x"
+       style="color:var(--color-primario); margin-bottom:20px;">
+    </i>
 
-<body>
+    <h1>Panel de Cocina</h1>
 
-<header>
+    <p>
+        Administra los pedidos pendientes y actualiza su estado.
+    </p>
 
-<h2>SIGPET</h2>
-
-<nav>
-<a href="/">Inicio</a>
-<a href="/menu">Menú</a>
-<a href="/consultar">Consultar pedido</a>
-<a href="/cocina">Cocina</a>
-</nav>
-
-</header>
-
-
-<main>
-
-<h1 class="titulo-cocina">Pedidos actuales</h1>
-
-<div class="panel-cocina">
+</section>
 
 {% if pedidos %}
 
+<div class="panel-cocina" id="panelPedidos">
+
 {% for pedido in pedidos %}
 
-<div class="pedido-card">
+<div class="card pedido-card">
 
-<h3>Pedido #{{pedido[0]}}</h3>
+    <h2 style="margin-bottom:20px;">
+        Pedido #{{ pedido["id"] }}
+    </h2>
 
-<p><strong>Nombre:</strong> {{pedido[1]}}</p>
+    <div class="menu-item">
+        <span>
+            <i class="fa-solid fa-user"></i>
+            Cliente
+        </span>
 
-<p><strong>Platillo:</strong> {{pedido[2]}}</p>
+        <strong>{{ pedido["cliente"] }}</strong>
+    </div>
 
-<p><strong>Cantidad:</strong> {{pedido[3]}}</p>
+    <div class="menu-item">
+        <span>
+            <i class="fa-solid fa-calendar"></i>
+            Fecha
+        </span>
 
-<p><strong>Tiempo:</strong> {{pedido[5]}} min</p>
+        <strong>{{ pedido["fecha"] }}</strong>
+    </div>
 
-<p class="estado">Estado: {{pedido[4]}}</p>
+    <div class="menu-item">
+        <span>
+            <i class="fa-solid fa-clock"></i>
+            Hora
+        </span>
 
-<form action="/cambiar_estado/{{pedido[0]}}" method="post">
+        <strong>{{ pedido["hora"] }}</strong>
+    </div>
+
+    <div class="menu-item">
+        <span>
+            <i class="fa-solid fa-money-bill-wave"></i>
+            Total
+        </span>
+
+        <strong>${{ pedido["total"] }}</strong>
+    </div>
+
+    <div class="menu-item">
+        <span>
+            <i class="fa-solid fa-truck-fast"></i>
+            Estado
+        </span>
+
+        <strong>{{ pedido["estado"] }}</strong>
+    </div>
+
+    <!-- PRODUCTOS -->
+
+    <div class="menu-item">
+
+        <span>
+
+            <i class="fa-solid fa-burger"></i>
+
+            Productos
+
+        </span>
+
+    </div>
+
+    <div style="padding:10px 20px;">
+
+        {% for producto in pedido["productos"] %}
+
+<p class="producto-cocina">
+
+    {% if producto["producto"] == "Hamburguesa" %}
+        🍔
+
+    {% elif producto["producto"] == "Tacos" %}
+        🌮
+
+    {% elif producto["producto"] == "Hot Dog" %}
+        🌭
+
+    {% elif producto["producto"] == "Refresco" %}
+        🥤
+
+    {% else %}
+        🍽️
+    {% endif %}
+
+    <strong>
+        {{ producto["producto"] }}
+    </strong>
+
+    <span>
+        x{{ producto["cantidad"] }}
+    </span>
+
+    <small>
+        ${{ producto["subtotal"] }}
+    </small>
+
+</p>
+
+{% endfor %}
+
+    </div>
+
+    <form
+        action="{{ url_for('cocina.cambiar_estado', id=pedido['id']) }}"
+        method="POST">
+
+{% if pedido["estado"] not in ["Cancelado","Entregado"] %}
 
 <div class="botones-cocina">
 
-<button name="estado" value="Preparando">Preparando</button>
-<button name="estado" value="Listo">Listo</button>
-<button name="estado" value="Entregado">Entregado</button>
+    <button
+        type="submit"
+        name="estado"
+        value="Preparando"
+        class="btn btn-advertencia">
+
+        <i class="fa-solid fa-fire-burner"></i>
+
+        Preparando
+
+    </button>
+
+    <button
+        type="submit"
+        name="estado"
+        value="Listo"
+        class="btn btn-exito">
+
+        <i class="fa-solid fa-bell-concierge"></i>
+
+        Listo
+
+    </button>
+
+    <button
+        type="submit"
+        name="estado"
+        value="Entregado"
+        class="btn btn-secundario">
+
+        <i class="fa-solid fa-circle-check"></i>
+
+        Entregado
+
+    </button>
+
+    <button
+        type="button"
+        class="btn btn-error"
+        onclick="abrirModal({{ pedido['id'] }})">
+
+        <i class="fa-solid fa-ban"></i>
+
+        Cancelar
+
+    </button>
 
 </div>
 
-</form>
+{% endif %}
+
+    </form>
 
 </div>
 
 {% endfor %}
 
+</div>
+
 {% else %}
 
-<p>No hay pedidos pendientes.</p>
+<section class="card hero-card">
+
+    <div style="font-size:65px;color:var(--color-exito);margin-bottom:20px;">
+
+        <i class="fa-solid fa-circle-check"></i>
+
+    </div>
+
+    <h2>No hay pedidos pendientes</h2>
+
+    <p>
+        Todos los pedidos han sido entregados.
+    </p>
+
+</section>
 
 {% endif %}
 
+<!-- =======================
+     MODAL
+======================= -->
+
+<div id="modalCancelar" class="modal">
+
+    <div class="modal-contenido">
+
+        <h2>Cancelar Pedido</h2>
+
+        <form id="formCancelar" method="POST">
+
+            <label>Motivo de cancelación</label>
+
+            <select id="motivoSelect">
+
+                <option>No hay ingredientes</option>
+
+                <option>Cocina saturada</option>
+
+                <option>Error en el pedido</option>
+
+                <option>Horario terminado</option>
+
+                <option value="otro">
+
+                    Otro motivo...
+
+                </option>
+
+            </select>
+
+            <br><br>
+
+            <textarea
+                id="otroMotivo"
+                placeholder="Escribe el motivo..."
+                style="display:none;">
+            </textarea>
+
+            <input
+                type="hidden"
+                id="motivoFinal"
+                name="motivo">
+
+            <br>
+
+            <div class="botones-cocina">
+
+                <button
+                    class="btn btn-error"
+                    type="submit">
+
+                    Cancelar Pedido
+
+                </button>
+
+                <button
+                    class="btn btn-secundario"
+                    type="button"
+                    onclick="cerrarModal()">
+
+                    Cerrar
+
+                </button>
+
+            </div>
+
+        </form>
+
+    </div>
+
 </div>
 
-</main>
+<script src="{{ url_for('static', filename='js/audio.js') }}"></script>
 
+<script src="{{ url_for('static', filename='js/cocina.js') }}"></script>
 
-<footer>
+<script src="{{ url_for('static', filename='js/notificaciones_cocina.js') }}"></script>
 
-<p>SIGPET - Sistema de pedidos en línea</p>
-
-</footer>
-
-</body>
-
-</html>
+{% endblock %}

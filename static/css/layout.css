@@ -1,0 +1,325 @@
+/* ==========================================
+   SIGPET 3.0
+   Layout General
+========================================== */
+
+/*==============================
+    BODY
+===============================*/
+
+body{
+
+    font-family:'Poppins',sans-serif;
+
+    background:
+        radial-gradient(circle at top left,#FFF6F1 0%,transparent 35%),
+        radial-gradient(circle at bottom right,#EAF3FF 0%,transparent 35%),
+        var(--color-fondo);
+
+    color:var(--color-texto);
+
+    min-height:100vh;
+
+    display:flex;
+
+    flex-direction:column;
+
+}
+
+/*==============================
+    HEADER
+===============================*/
+
+header{
+
+    position:sticky;
+
+    top:0;
+
+    z-index:1000;
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+
+    padding:18px 45px;
+
+    background:var(--color-header);
+
+    backdrop-filter:blur(14px);
+
+    border-bottom:1px solid rgba(0,0,0,.05);
+
+    box-shadow:0 8px 20px rgba(0,0,0,.05);
+
+}
+
+/*==============================
+    LOGO
+===============================*/
+
+.logo{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:15px;
+
+}
+
+.logo img{
+
+    width:60px;
+
+    height:60px;
+
+}
+
+.logo h1{
+
+    color:var(--color-secundario);
+
+    font-size:1.9rem;
+
+    font-weight:700;
+
+    margin-bottom:2px;
+
+}
+
+.logo p{
+
+    color:var(--color-texto-secundario);
+
+    font-size:.9rem;
+
+}
+
+/*==============================
+    NAV
+===============================*/
+
+nav{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:10px;
+
+}
+
+nav a{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:8px;
+
+    padding:12px 18px;
+
+    border-radius:14px;
+
+    color:var(--color-texto);
+
+    font-weight:500;
+
+    transition:var(--transicion);
+
+}
+
+nav a:hover{
+
+    background:var(--color-secundario);
+
+    color:white;
+
+    transform:translateY(-2px);
+
+}
+
+/*==============================
+    MAIN
+===============================*/
+
+main{
+
+    flex:1;
+
+    width:100%;
+
+    max-width:1100px;
+
+    margin:auto;
+
+    padding:45px 20px;
+
+}
+
+/*==============================
+    TÍTULOS
+===============================*/
+
+h1{
+
+    font-size:2.2rem;
+
+    color:var(--color-titulo);
+
+    margin-bottom:10px;
+
+}
+
+h2{
+
+    color:var(--color-titulo);
+
+}
+
+p{
+
+    line-height:1.8;
+
+}
+
+/*==============================
+    FOOTER
+===============================*/
+
+footer{
+
+    margin-top:60px;
+
+    background:linear-gradient(
+        135deg,
+        var(--color-secundario),
+        #082548
+    );
+
+    color:white;
+
+    text-align:center;
+
+    padding:40px 20px;
+
+}
+
+footer h3{
+
+    color:white;
+
+    margin-bottom:10px;
+
+}
+
+footer p{
+
+    color:rgba(255,255,255,.8);
+
+}
+
+/*==============================
+    SCROLL
+===============================*/
+
+::-webkit-scrollbar{
+
+    width:10px;
+
+}
+
+::-webkit-scrollbar-track{
+
+    background:#ECECEC;
+
+}
+
+::-webkit-scrollbar-thumb{
+
+    background:var(--color-secundario);
+
+    border-radius:20px;
+
+}
+
+::-webkit-scrollbar-thumb:hover{
+
+    background:var(--color-primario);
+
+}
+
+/*==============================
+    RESPONSIVE
+===============================*/
+
+@media(max-width:900px){
+
+    header{
+
+        flex-direction:column;
+
+        gap:20px;
+
+        padding:20px;
+
+    }
+
+    nav{
+
+        flex-wrap:wrap;
+
+        justify-content:center;
+
+    }
+
+}
+
+@media(max-width:600px){
+
+    .logo{
+
+        flex-direction:column;
+
+        text-align:center;
+
+    }
+
+    .logo img{
+
+        width:55px;
+
+        height:55px;
+
+    }
+
+    .logo h1{
+
+        font-size:1.6rem;
+
+    }
+
+    nav{
+
+        width:100%;
+
+    }
+
+    nav a{
+
+        width:100%;
+
+        justify-content:center;
+
+    }
+
+    main{
+
+        padding:30px 15px;
+
+    }
+
+}

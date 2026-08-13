@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#0D3B78">
+
+    <title>
+        {% block title %}
+        SIGPET
+        {% endblock %}
+    </title>
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+          rel="stylesheet">
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+
+    <!-- CSS -->
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='css/style.css') }}">
+
+</head>
+
+<body>
+
+<header>
+
+    <div class="logo">
+
+        <img src="{{ url_for('static', filename='logo.png') }}" alt="SIGPET">
+
+        <div>
+
+            <h1>SIGPET</h1>
+
+            <p>Sistema Inteligente de Pedidos</p>
+
+        </div>
+
+    </div>
+
+   <nav>
+
+    <a href="{{ url_for('pedidos.bienvenida') }}">
+        <i class="fa-solid fa-house"></i>
+        Inicio
+    </a>
+
+    <a href="{{ url_for('pedidos.menu') }}">
+        <i class="fa-solid fa-utensils"></i>
+        Menú
+    </a>
+
+    <a href="{{ url_for('pedidos.consultar') }}">
+        <i class="fa-solid fa-magnifying-glass"></i>
+        Consultar
+    </a>
+
+    {% if session.get("usuario") %}
+
+    <a href="{{ url_for('cocina.panel_cocina') }}">
+        <i class="fa-solid fa-kitchen-set"></i>
+        Cocina
+    </a>
+
+    <a href="{{ url_for('historial.ver_historial') }}">
+        <i class="fa-solid fa-clock-rotate-left"></i>
+        Historial
+    </a>
+
+    <a href="{{ url_for('dashboard.dashboard_admin') }}">
+        <i class="fa-solid fa-chart-line"></i>
+        Dashboard
+    </a>
+
+    <a href="{{ url_for('auth.logout') }}">
+        <i class="fa-solid fa-right-from-bracket"></i>
+        Salir
+    </a>
+
+    {% endif %}
+
+</nav>
+
+</header>
+
+<main>
+
+    {% with mensajes = get_flashed_messages(with_categories=true) %}
+
+        {% if mensajes %}
+
+            {% for categoria, mensaje in mensajes %}
+
+                <div class="alert {{ categoria }}">
+                    {{ mensaje }}
+                </div>
+
+            {% endfor %}
+
+        {% endif %}
+
+    {% endwith %}
+
+    {% block content %}
+    {% endblock %}
+
+</main>
+
+<footer>
+
+    <h3>SIGPET 2.0</h3>
+
+    <p>Sistema Inteligente para Gestión de Pedidos</p>
+
+    <p style="margin-top:10px;font-size:.9rem;">
+        © 2026 Todos los derechos reservados
+    </p>
+
+</footer>
+
+<!-- Música de fondo -->
+<audio id="musicaFondo" loop>
+    <source 
+        src="{{ url_for('static', filename='audio/musica_mientras_esta_en_la_pagina.mp3') }}"
+        type="audio/mpeg"
+    >
+    Tu navegador no soporta audio.
+</audio>
+
+
+<!-- 🎵 Controlador de música -->
+<div class="music-player">
+
+    <button id="btnMusica" class="music-btn">
+        <i class="fa-solid fa-volume-high"></i>
+    </button>
+
+    <input 
+        type="range"
+        id="volumenMusica"
+        min="0"
+        max="100"
+        value="80"
+    >
+
+</div>
+
+</div>
+
+<!-- Scripts -->
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+<script src="{{ url_for('static', filename='js/audio.js') }}"></script>
+
+<script src="{{ url_for('static', filename='js/app.js') }}"></script>
+
+</body>
+</html>

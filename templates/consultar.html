@@ -1,67 +1,54 @@
-<!DOCTYPE html>
-<html lang="es">
+{% extends "base.html" %}
 
-<head>
+{% block title %}
+Consultar Pedido | SIGPET
+{% endblock %}
 
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+{% block content %}
 
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
-<meta name="theme-color" content="#0d3b78">
+<div class="card hero-card">
 
-<link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <i class="fa-solid fa-magnifying-glass fa-4x"
+       style="color: var(--color-primario); margin-bottom:25px;">
+    </i>
 
-<title>Consultar pedido | SIGPET</title>
+    <h1>Consultar Pedido</h1>
 
-</head>
+    <p style="margin-bottom:35px;">
+        Ingresa el número de tu pedido para consultar su estado en tiempo real.
+    </p>
 
-<body>
+    <form action="/buscar_pedido" method="post">
 
-<header>
+        <div class="form-group">
 
-<h1>SIGPET</h1>
+            <label for="numero_pedido">
 
-<nav>
-<a href="/">Inicio</a>
-<a href="/menu">Menú</a>
-<a href="/consultar">Consultar pedido</a>
-<a href="/cocina">Cocina</a>
-</nav>
+                <i class="fa-solid fa-hashtag"></i>
 
-</header>
+                Número de Pedido
 
-<main>
+            </label>
 
-<div class="card">
+            <input
+                type="number"
+                id="numero_pedido"
+                name="numero_pedido"
+                placeholder="Ejemplo: 1001"
+                required>
 
-<h2>Consultar pedido</h2>
+        </div>
 
-<p>Ingresa el número de tu pedido</p>
+        <button type="submit" class="btn btn-grande">
 
-<form action="/buscar_pedido" method="post">
+            <i class="fa-solid fa-magnifying-glass"></i>
 
-<label>Número de pedido</label>
+            Buscar Pedido
 
-<input type="number" name="numero_pedido" required>
+        </button>
 
-<br><br>
-
-<button type="submit" class="btn-principal">
-Buscar pedido
-</button>
-
-</form>
+    </form>
 
 </div>
 
-</main>
-
-<footer>
-
-<p>SIGPET — Sistema de pedidos en línea</p>
-
-</footer>
-
-</body>
-
-</html>
+{% endblock %}

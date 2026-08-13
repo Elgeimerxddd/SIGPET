@@ -1,77 +1,77 @@
-<!DOCTYPE html>
-<html>
+{% extends "base.html" %}
 
-<head>
+{% block title %}
+Menú | SIGPET
+{% endblock %}
 
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+{% block content %}
 
-<meta charset="UTF-8">
+<div class="card hero-card">
 
-<link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <i class="fa-solid fa-utensils fa-4x"
+       style="color: var(--color-primario); margin-bottom:25px;">
+    </i>
 
-<title>Menú | SIGPET</title>
+    <h1>Nuestro Menú</h1>
 
-</head>
+    <p style="margin-bottom:35px;">
+        Selecciona tu platillo favorito y continúa con tu pedido.
+    </p>
 
-<body>
+    <div class="menu-item">
 
-<header>
+        <span>
+            <i class="fa-solid fa-pepper-hot"></i>
+            Tacos
+        </span>
 
-<link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+        <strong>$25</strong>
 
-<h2>SIGPET</h2>
+    </div>
 
-<nav>
-<a href="/">Inicio</a>
-<a href="/menu">Menú</a>
-<a href="/consultar">Consultar pedido</a>
-<a href="/cocina">Cocina</a>
-</nav>
+    <div class="menu-item">
 
-</header>
+        <span>
+            <i class="fa-solid fa-burger"></i>
+            Hamburguesa
+        </span>
 
-<main>
+        <strong>$95</strong>
 
-<div class="card">
+    </div>
 
-<h2>Menú disponible</h2>
+    <div class="menu-item">
 
-<div class="menu-item">
-<span>Tacos</span>
-<span>$25</span>
+        <span>
+            <i class="fa-solid fa-hotdog"></i>
+            Hot Dog
+        </span>
+
+        <strong>$35</strong>
+
+    </div>
+
+    <div class="menu-item">
+
+        <span>
+            <i class="fa-solid fa-glass-water"></i>
+            Refresco
+        </span>
+
+        <strong>$20</strong>
+
+    </div>
+
+    <br><br>
+
+    <a href="/pedido" class="btn btn-grande">
+
+        <i class="fa-solid fa-cart-shopping"></i>
+
+        Realizar Pedido
+
+    </a>
+
 </div>
 
-<div class="menu-item">
-<span>Hamburguesa</span>
-<span>$80</span>
-</div>
-
-<div class="menu-item">
-<span>Hotdog</span>
-<span>$35</span>
-</div>
-
-<div class="menu-item">
-<span>Refresco</span>
-<span>$20</span>
-</div>
-
-<br>
-
-<a href="/pedido">
-<button class="btn-principal">Realizar pedido</button>
-</a>
-
-</div>
-
-</main>
-
-<footer>
-
-<p>SIGPET — Sistema de gestión de pedidos</p>
-
-</footer>
-
-</body>
-
-</html>
+{% endblock %}

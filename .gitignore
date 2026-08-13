@@ -1,0 +1,29 @@
+# Entornos virtuales
+.venv/
+.venv-1/
+.venv-2/
+venv/
+env/
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Base de datos local
+pedidos.db
+
+# Archivos temporales
+*.log
+*.tmp
+
+# Configuración local
+.env
+
+# VS Code
+.vscode/
+
+# Archivos de apoyo / documentación local
+dashboard_sigpet.pdf
+dashboard_sigpet.xlsx
+pedidos.sqbpro
